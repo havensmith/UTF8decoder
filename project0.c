@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <math.h>
+
 
 int pow(int base, int pow) {
    int product = 1;
