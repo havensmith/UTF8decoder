@@ -103,8 +103,7 @@ void sortMap(){
 }
 
 int main() {
-   FILE *file = fopen("sample.txt", "r");
-   char c = getc(file);
+   char c = getchar();
    while(c != EOF){
       unsigned char bytes[4] = {0, 0, 0, 0}; //holds bytes of scanned characters
       int length = byteLength(c);
@@ -112,14 +111,14 @@ int main() {
       bytes[startIndex] = (unsigned char)c; //set first byte
       //set remaining bytes
       for(int i = startIndex + 1; i < 4; i++){
-         bytes[i] = getc(file);
+         bytes[i] = getchar();
       }
       //create a UTF8 character with useful info to help unicode function
       struct UTF8Char utf8Char = {{bytes[0], bytes[1], bytes[2], bytes[3]}, length, startIndex, 0};
       utf8Char.unicode = convertUnicode(utf8Char);
       addChar(utf8Char);
       //printf("%d", utf8Char.code);
-      c = getc(file); //scan in next character
+      c = getchar(); //scan in next character
    }
    sortMap(); //sorts map of characters and frequencies from most occuring to least
    //prints characters and respective frequencies. Some characters such as ' ' and \n print in a nonstandard way, so cases are added
