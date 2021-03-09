@@ -1,6 +1,6 @@
 # cs3113sp21-project0
-Haven Smith
-student ID: 113516246
+Haven Smith<br/>
+student ID: 113516246<br/>
 class: CS3113 (spring 21)
 ## Usage
 1. insert your text into the file "sample.txt"
