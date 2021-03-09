@@ -71,6 +71,25 @@ void addChar(int UTFCode){
    return;
 }
 
+void sortMap(){
+   int sorted = 0;
+   while (sorted == 0) {
+      sorted = 1;
+      for (int i = 0; i < mapSize - 1; i++) {
+         if (frequency[i] < frequency[i + 1]) {
+            //swap
+            int temp1 = frequency[i];
+            int temp2 = chars[i];
+            frequency[i] = frequency[i + 1];
+            chars[i] = chars[i + 1];
+            frequency[i + 1] = temp1;
+            chars[i + 1] = temp2;
+            sorted = 0;
+         }
+      }
+   }
+}
+
 int main() {
    FILE *file = fopen("test1.txt", "r");
    char c = getc(file);
@@ -88,15 +107,22 @@ int main() {
       //printf("%d", utf8Char.code);
       c = getc(file);
    }
+   sortMap();
    for (int i = 0; i < mapSize; i++) {
-      if(chars[i] < 128){
+      if(chars[i] == 10){
+         printf(" NEWLINE -> %d\n", frequency[i]);
+      }
+      else if(chars[i] == 32){
+         printf("   SPACE -> %d\n", frequency[i]);
+      }
+      else if(chars[i] < 128){
+         printf("       ");
          putchar((char)chars[i]);
          printf(" -> %d\n", frequency[i]);
       }
       else {
-         printf("%x -> %d\n", chars[i], frequency[i]);
+         printf("UTF+%x -> %d\n", chars[i], frequency[i]);
       }
-      
    }
    return 0;
 }
