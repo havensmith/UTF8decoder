@@ -1,15 +1,52 @@
 #include <stdio.h>
-int leadingOneCount(char leadByte){
+#include <math.h>
+
+int chars[150000]; //there are 143,859 characters in unicode
+int frequency[150000];
+int mapSize = 0;
+
+struct UTF8Char {
+   unsigned char bytes[4];
+   int length;
+   int startIndex;
+   int code;
+
+};
+
+int byteLength(char leadByte){
    int count = 0;
    int i = 7;
    while(((leadByte >> i) & 0x01) == 0x01) {
       count++;
       i--;
    }
+   if(count == 0) {
+      return 1;
+   }
    return count;
 }
 
-int utf(char bytes[], int byteLength) {
+int UTFCode(struct UTF8Char c) {
+   if (c.length == 1){
+      return (int)c.bytes[3];
+   }
+   else{
+      int sum = 0;
+      for (int i = 3; i > c.startIndex; i--) {
+         sum += ((int)(c.bytes[i]) - 128) * pow(2, 6 * (3 - i));
+      }
+      int sum2 = (int)c.bytes[c.startIndex];
+      for (int i = 0; i < c.length; i++) {
+         sum2 -= pow(2, 7 - i);
+      }
+      sum2 *= pow(2, 6 * (c.length - 1));
+      sum += sum2;
+      return sum;
+   }
+   
+
+
+
    // for(int i = 0; i < 4; i++) {
    //    char byte = bytes[i];
    //    for (int j = 0; j < 8; j++) {
@@ -17,37 +54,50 @@ int utf(char bytes[], int byteLength) {
    //    }
    //    printf("\n");
    // }
-   // return 0;
-   if(byteLength == 0){
-      return 
-   }
-   else{
-      for(int i = byteLength - 1; i <= 0; i--) {
-
-      }
-   }
-   
+   return 0;
    
 }
 
-
+void addChar(int UTFCode){
+   for (int i = 0; i < mapSize; i++) {
+      if (chars[i] == UTFCode) {
+         frequency[i] ++;
+         return;
+      }
+   }
+   chars[mapSize] = UTFCode;
+   frequency[mapSize] = 1;
+   mapSize++;
+   return;
+}
 
 int main() {
-   char c = getchar();
+   FILE *file = fopen("test1.txt", "r");
+   char c = getc(file);
    while(c != EOF){
-      char bytes[4] = {0, 0, 0, 0};
-      int byteLength = leadingOneCount(c);
-      bytes[0] = c;
-      for(int i = 1; i < byteLength; i++){
-         bytes[i] = getchar();
+      unsigned char bytes[4] = {0, 0, 0, 0};
+      int length = byteLength(c);
+      int startIndex = 4 - length;
+      bytes[startIndex] = (unsigned char)c;
+      for(int i = startIndex + 1; i < 4; i++){
+         bytes[i] = getc(file);
       }
-      utf(bytes, byteLength);
-      c = getchar();
+      struct UTF8Char utf8Char = {{bytes[0], bytes[1], bytes[2], bytes[3]}, length, startIndex, 0};
+      utf8Char.code = UTFCode(utf8Char);
+      addChar(utf8Char.code);
+      //printf("%d", utf8Char.code);
+      c = getc(file);
    }
-   printf("Character Entered: ");
-   putchar(c);
-   printf("\n");
-
+   for (int i = 0; i < mapSize; i++) {
+      if(chars[i] < 128){
+         putchar((char)chars[i]);
+         printf(" -> %d\n", frequency[i]);
+      }
+      else {
+         printf("%x -> %d\n", chars[i], frequency[i]);
+      }
+      
+   }
    return 0;
 }
 
