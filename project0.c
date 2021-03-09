@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <math.h>
 
+int pow(int base, int pow) {
+   int product = 1;
+   for(int i = 0; i < pow; i++) {
+      product *= base;
+   }
+   return product;
+}
+
 //structure to hold bytes of characters encoded in UTF8
 struct UTF8Char {
    unsigned char bytes[4]; //byte array
