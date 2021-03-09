@@ -1,5 +1,8 @@
 # cs3113sp21-project0
-##Usage
+Haven Smith
+student ID: 113516246
+class: CS3113 (spring 21)
+## Usage
 1. insert your text into the file "sample.txt"
 2. run the command "make all" on the terminal from the folder "CS3113SP21-PROJECT0"
 3. run the command "make run" in the same directory
