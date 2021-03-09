@@ -103,7 +103,7 @@ void sortMap(){
 }
 
 int main() {
-   FILE *file = fopen("test1.txt", "r");
+   FILE *file = fopen("sample.txt", "r");
    char c = getc(file);
    while(c != EOF){
       unsigned char bytes[4] = {0, 0, 0, 0}; //holds bytes of scanned characters
