@@ -18,8 +18,8 @@ struct UTF8Char {
 };
 
 //set of all characters
-struct UTF8Char chars[150000]; //there are 143,859 unique characters in unicode
-int frequency[150000];
+struct UTF8Char chars[1500000]; //there are 143,859 unique characters in unicode
+int frequency[1500000];
 int mapSize = 0;
 
 //returns the bytelength of a character given it's lead byte
