@@ -136,7 +136,7 @@ int main() {
          char c = chars[i].bytes[j];
          putchar(c);
       }
-      printf("-> %d\n", frequency[i]);
+      printf("->%d\n", frequency[i]);
       
    }
    return 0;
