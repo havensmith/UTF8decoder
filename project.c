@@ -139,5 +139,4 @@ int main() {
          printf("-> %d\n", frequency[i]);
       }
    }
-   return 0;
 }
