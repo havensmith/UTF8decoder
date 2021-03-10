@@ -132,11 +132,14 @@ int main() {
    //prints characters and respective frequencies. Some characters such as ' ' and \n print in a nonstandard way, so cases are added
    //for these
    for (int i = 0; i < mapSize; i++) {
-      for(int j = chars[i].startIndex; j < 4; j++) {
-         char c = chars[i].bytes[j];
-         putchar(c);
+      if (chars[i].bytes[3] != 0) {
+         for(int j = chars[i].startIndex; j < 4; j++) {
+            char c = chars[i].bytes[j];
+            putchar(c);
+         }
+         printf("->%d\n", frequency[i]);
       }
-      printf("->%d\n", frequency[i]);
+      
       
    }
    return 0;

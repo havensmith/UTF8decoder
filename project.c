@@ -126,12 +126,12 @@ int main() {
    //for these
    for (int i = 0; i < mapSize; i++) {
       if(chars[i].unicode == 10){
-         printf("NEWLINE -> %d\n", frequency[i]);
+         printf("NEWLINE->%d\n", frequency[i]);
       }
       else if(chars[i].unicode == 32){
-         printf("SPACE -> %d\n", frequency[i]);
+         printf("SPACE->%d\n", frequency[i]);
       }
-      else {
+      else if (chars[i].unicode != 0) {
          for(int j = chars[i].startIndex; j < 4; j++) {
             char c = chars[i].bytes[j];
             putchar(c);
