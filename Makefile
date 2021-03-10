@@ -1,5 +1,7 @@
 all: project.c
 	gcc -o project0 project0.c
+
+all2:
 	gcc -o project project.c
 
 clean:
