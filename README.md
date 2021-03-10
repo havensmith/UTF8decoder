@@ -7,5 +7,5 @@ class: CS3113 (spring 21)
 2. run the command "make all2" on the terminal from the folder "CS3113SP21-PROJECT0"
 3. run the command "make run" in the same directory
 4. if you wish to switch the sample text, change the text, resave sample.txt, and run the command "make run" from the project directory
-5. to clear the exectuable file, run "make clear"
+5. to clear the exectuable file, run "make clean2"
 
