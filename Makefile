@@ -6,7 +6,9 @@ all2:
 
 clean:
 	rm project0
-	rm project
+
+clean2:
+	rm project0
 
 run:
 	./project
